@@ -1,0 +1,12 @@
+{
+  "name": "ipa-core",
+  "version": "1.0.0",
+  "description": "Language-agnostic IPA core with features",
+  "license": "ISC",
+  "author": "Cody Bruno",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
