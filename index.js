@@ -2,11 +2,13 @@
 const core = require("./core");           // base consonants & vowels
 const modifiers = require("./modifiers"); // diacritics, tones, suprasegmentals
 const rules = require("./rules");         // modifier compatibility rules
+const parser = require("./parser"); //parser
 
 // Export the layers so users can access them if needed
 module.exports = {
   core,
   modifiers,
-  rules
+  rules,
+  ...parser
 };
 

@@ -1,5 +1,5 @@
 // IPA elements in json notation
-const ipaCore = {
+const core = {
 
     //consonants
     //pulmonic
@@ -99,32 +99,34 @@ const ipaCore = {
     'ɧ': { type: "consonant", coarticulated: true, components: ["ʃ", "x"] },
     //vowels
     //front
-    ' i': { type: "vowel", features: { height: "close", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' y': { type: "vowel", features: { height: "close", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɪ': { type: "vowel", features: { height: "near-close", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ʏ': { type: "vowel", features: { height: "near-close", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
-    ' e': { type: "vowel", features: { height: "close-mid", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ø': { type: "vowel", features: { height: "close-mid", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɛ': { type: "vowel", features: { height: "open-mid", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' œ': { type: "vowel", features: { height: "open-mid", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
-    ' æ': { type: "vowel", features: { height: "near-open", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
+    'i': { type: "vowel", features: { height: "close", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
+    'y': { type: "vowel", features: { height: "close", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɪ': { type: "vowel", features: { height: "near-close", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ʏ': { type: "vowel", features: { height: "near-close", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
+    'e': { type: "vowel", features: { height: "close-mid", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ø': { type: "vowel", features: { height: "close-mid", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɛ': { type: "vowel", features: { height: "open-mid", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
+    'œ': { type: "vowel", features: { height: "open-mid", backness: "front", rounding: "rounded" }, airstream: "pulmonic" },
+    'æ': { type: "vowel", features: { height: "near-open", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },
     //central
-    ' ə': { type: "vowel", features: { height: "mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ɨ': { type: "vowel", features: { height: "close", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ʉ': { type: "vowel", features: { height: "close", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɘ': { type: "vowel", features: { height: "close-mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ɵ': { type: "vowel", features: { height: "close-mid", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɜ': { type: "vowel", features: { height: "open-mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ɞ': { type: "vowel", features: { height: "open-mid", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɐ': { type: "vowel", features: { height: "near-open", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ə': { type: "vowel", features: { height: "mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ɨ': { type: "vowel", features: { height: "close", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ʉ': { type: "vowel", features: { height: "close", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɘ': { type: "vowel", features: { height: "close-mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ɵ': { type: "vowel", features: { height: "close-mid", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɜ': { type: "vowel", features: { height: "open-mid", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ɞ': { type: "vowel", features: { height: "open-mid", backness: "central", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɐ': { type: "vowel", features: { height: "near-open", backness: "central", rounding: "unrounded" }, airstream: "pulmonic" },
     //back
-    ' ɯ': { type: "vowel", features: { height: "close", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' u': { type: "vowel", features: { height: "close", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ʊ': { type: "vowel", features: { height: "near-close", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɤ': { type: "vowel", features: { height: "close-mid", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' o': { type: "vowel", features: { height: "close-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɔ': { type: "vowel", features: { height: "open-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
-    ' ɑ': { type: "vowel", features: { height: "open", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
-    ' ɒ': { type: "vowel", features: { height: "open", backness: "back", rounding: "rounded" }, airstream: "pulmonic" }
+    'ɯ': { type: "vowel", features: { height: "close", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
+    'u': { type: "vowel", features: { height: "close", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
+    'ʊ': { type: "vowel", features: { height: "near-close", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɤ': { type: "vowel", features: { height: "close-mid", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
+    'o': { type: "vowel", features: { height: "close-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɔ': { type: "vowel", features: { height: "open-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
+    'ɑ': { type: "vowel", features: { height: "open", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
+    'ɒ': { type: "vowel", features: { height: "open", backness: "back", rounding: "rounded" }, airstream: "pulmonic" }
 
 }
+
+module.exports = core

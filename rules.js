@@ -1,5 +1,5 @@
 //modifier compatability
-const modifierRules = {
+const rules = {
   // Voicing / phonation
   voiceless: { incompatibleWith: ["voiced", "creaky_voice", "breathy_voice"] },
   voiced: { incompatibleWith: ["voiceless", "voiceless_flap"] },
@@ -48,3 +48,5 @@ const modifierRules = {
   aspirated: { incompatibleWith: ["voiceless_flap", "no_audible_release"] },
   no_audible_release: { incompatibleWith: ["aspirated"] }
 };
+
+module.exports = rules

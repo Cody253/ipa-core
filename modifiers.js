@@ -1,47 +1,250 @@
 const modifiers = {
-    //diacritics
-  voiceless: { symbol: "̥", appliesTo: "consonant" },
-  voiced: { symbol: "̬", appliesTo: "consonant" },
-  aspirated: { symbol: "ʰ", appliesTo: "consonant" },
-  more_rounded: { symbol: "̹", appliesTo: "vowel" },
-  less_rounded: { symbol: "̜", appliesTo: "vowel" },
-  advanced: { symbol: "̟", appliesTo: "consonant" },
-  retracted: { symbol: "̠", appliesTo: "consonant" },
-  centralized: { symbol: "̈", appliesTo: "vowel" },
-  mid_centralized: { symbol: "̽", appliesTo: "vowel" },
-  syllabic: { symbol: "̩", appliesTo: "consonant" },
-  non_syllabic: { symbol: "̯", appliesTo: "vowel" },
-  dental: { symbol: "̪", appliesTo: "consonant" },
-  apical: { symbol: "̺", appliesTo: "consonant" },
-  laminal: { symbol: "̻", appliesTo: "consonant" },
-  velarized_or_pharyngealized: { symbol: "ˠ", appliesTo: "consonant" },
-  palatalized: { symbol: "ʲ", appliesTo: "consonant" },
-  labialized: { symbol: "ʷ", appliesTo: "consonant" },
-  pharyngealized: { symbol: "ˤ", appliesTo: "consonant" },
-  nasalized: { symbol: "̃", appliesTo: ["vowel", "consonant"] },
-  rhoticity: { symbol: "˞", appliesTo: "vowel" },
-  length_half_long: { symbol: "ˑ", appliesTo: ["vowel","consonant"] },
-  length_long: { symbol: "ː", appliesTo: ["vowel","consonant"] },
-  extra_short: { symbol: "̆", appliesTo: ["vowel","consonant"] },
-  voiceless_flap: { symbol: "̥̆", appliesTo: "consonant" },
-  creaky_voice: { symbol: "̰", appliesTo: ["vowel","consonant"] },
-  breathy_voice: { symbol: "̤", appliesTo: ["vowel","consonant"] },
-  linguolabial: { symbol: "̼", appliesTo: "consonant" },
-  raised: { symbol: "̝", appliesTo: ["vowel","consonant"] },
-  lowered: { symbol: "̞", appliesTo: ["vowel","consonant"] },
-  advanced_tongue_root: { symbol: "̘", appliesTo: "vowel" },
-  retracted_tongue_root: { symbol: "̙", appliesTo: "vowel" },
-  velarized: { symbol: "̴", appliesTo: "consonant" },
-  //tones and accents
-  high_tone: { symbol: "́", appliesTo: ["vowel","consonant"] },
-  low_tone: { symbol: "̀", appliesTo: ["vowel","consonant"] },
-  rising_tone: { symbol: "̌", appliesTo: ["vowel","consonant"] },
-  falling_tone: { symbol: "̂", appliesTo: ["vowel","consonant"] },
-  extra_high_tone: { symbol: "᷄", appliesTo: ["vowel","consonant"] },
-  extra_low_tone: { symbol: "᷅", appliesTo: ["vowel","consonant"] },
-  downstep: { symbol: "ꜜ", appliesTo: ["vowel","consonant"] },
-  upstep: { symbol: "ꜛ", appliesTo: ["vowel","consonant"] },
-  no_audible_release: { symbol: "̚", appliesTo: "consonant" },
-  extra_high_pitch: { symbol: "᷄", appliesTo: ["vowel","consonant"] },
-  extra_low_pitch: { symbol: "᷅", appliesTo: ["vowel","consonant"] }
+  // DIACRITICS
+
+  voiceless: {
+    symbol: "̥",
+    appliesTo: "consonant",
+    effects: { voicing: "voiceless" }
+  },
+  voiced: {
+    symbol: "̬",
+    appliesTo: "consonant",
+    effects: { voicing: "voiced" }
+  },
+  aspirated: {
+    symbol: "ʰ",
+    appliesTo: "consonant",
+    effects: { aspiration: true }
+  },
+
+  more_rounded: {
+    symbol: "̹",
+    appliesTo: "vowel",
+    effects: { rounding: "more" }
+  },
+  less_rounded: {
+    symbol: "̜",
+    appliesTo: "vowel",
+    effects: { rounding: "less" }
+  },
+
+  advanced: {
+    symbol: "̟",
+    appliesTo: "consonant",
+    effects: { placeModifier: "advanced" }
+  },
+  retracted: {
+    symbol: "̠",
+    appliesTo: "consonant",
+    effects: { placeModifier: "retracted" }
+  },
+
+  centralized: {
+    symbol: "̈",
+    appliesTo: "vowel",
+    effects: { backness: "centralized" }
+  },
+  mid_centralized: {
+    symbol: "̽",
+    appliesTo: "vowel",
+    effects: { backness: "mid-centralized" }
+  },
+
+  syllabic: {
+    symbol: "̩",
+    appliesTo: "consonant",
+    effects: { syllabic: true }
+  },
+  non_syllabic: {
+    symbol: "̯",
+    appliesTo: "vowel",
+    effects: { syllabic: false }
+  },
+
+  dental: {
+    symbol: "̪",
+    appliesTo: "consonant",
+    effects: { placeModifier: "dental" }
+  },
+  apical: {
+    symbol: "̺",
+    appliesTo: "consonant",
+    effects: { articulation: "apical" }
+  },
+  laminal: {
+    symbol: "̻",
+    appliesTo: "consonant",
+    effects: { articulation: "laminal" }
+  },
+
+  velarized_or_pharyngealized: {
+    symbol: "ˠ",
+    appliesTo: "consonant",
+    effects: { secondaryArticulation: "velarized_or_pharyngealized" }
+  },
+  velarized: {
+    symbol: "̴",
+    appliesTo: "consonant",
+    effects: { secondaryArticulation: "velarized" }
+  },
+  palatalized: {
+    symbol: "ʲ",
+    appliesTo: "consonant",
+    effects: { secondaryArticulation: "palatalized" }
+  },
+  labialized: {
+    symbol: "ʷ",
+    appliesTo: "consonant",
+    effects: { secondaryArticulation: "labialized" }
+  },
+  pharyngealized: {
+    symbol: "ˤ",
+    appliesTo: "consonant",
+    effects: { secondaryArticulation: "pharyngealized" }
+  },
+
+  nasalized: {
+    symbol: "̃",
+    appliesTo: ["vowel", "consonant"],
+    effects: { nasalization: true }
+  },
+
+  rhoticity: {
+    symbol: "˞",
+    appliesTo: "vowel",
+    effects: { rhotic: true }
+  },
+
+  length_half_long: {
+    symbol: "ˑ",
+    appliesTo: ["vowel", "consonant"],
+    effects: { length: "half-long" }
+  },
+  length_long: {
+    symbol: "ː",
+    appliesTo: ["vowel", "consonant"],
+    effects: { length: "long" }
+  },
+  extra_short: {
+    symbol: "̆",
+    appliesTo: ["vowel", "consonant"],
+    effects: { length: "extra-short" }
+  },
+
+  voiceless_flap: {
+    symbol: "̥̆",
+    appliesTo: "consonant",
+    effects: {
+      voicing: "voiceless",
+      mannerModifier: "flap"
+    }
+  },
+
+  creaky_voice: {
+    symbol: "̰",
+    appliesTo: ["vowel", "consonant"],
+    effects: { phonation: "creaky" }
+  },
+  breathy_voice: {
+    symbol: "̤",
+    appliesTo: ["vowel", "consonant"],
+    effects: { phonation: "breathy" }
+  },
+
+  linguolabial: {
+    symbol: "̼",
+    appliesTo: "consonant",
+    effects: { placeModifier: "linguolabial" }
+  },
+
+  raised: {
+    symbol: "̝",
+    appliesTo: ["vowel", "consonant"],
+    effects: { heightModifier: "raised" }
+  },
+  lowered: {
+    symbol: "̞",
+    appliesTo: ["vowel", "consonant"],
+    effects: { heightModifier: "lowered" }
+  },
+
+  advanced_tongue_root: {
+    symbol: "̘",
+    appliesTo: "vowel",
+    effects: { tongueRoot: "advanced" }
+  },
+  retracted_tongue_root: {
+    symbol: "̙",
+    appliesTo: "vowel",
+    effects: { tongueRoot: "retracted" }
+  },
+
+  // TONES / ACCENTS
+
+  high_tone: {
+    symbol: "́",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "high" }
+  },
+  low_tone: {
+    symbol: "̀",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "low" }
+  },
+  rising_tone: {
+    symbol: "̌",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "rising" }
+  },
+  falling_tone: {
+    symbol: "̂",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "falling" }
+  },
+  extra_high_tone: {
+    symbol: "᷄",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "extra-high" }
+  },
+  extra_low_tone: {
+    symbol: "᷅",
+    appliesTo: ["vowel", "consonant"],
+    effects: { tone: "extra-low" }
+  },
+
+  extra_high_pitch: {
+    symbol: "᷄",
+    appliesTo: ["vowel", "consonant"],
+    effects: { pitch: "extra-high" }
+  },
+  extra_low_pitch: {
+    symbol: "᷅",
+    appliesTo: ["vowel", "consonant"],
+    effects: { pitch: "extra-low" }
+  },
+
+  downstep: {
+    symbol: "ꜜ",
+    appliesTo: ["vowel", "consonant"],
+    effects: { toneModifier: "downstep" }
+  },
+  upstep: {
+    symbol: "ꜛ",
+    appliesTo: ["vowel", "consonant"],
+    effects: { toneModifier: "upstep" }
+  },
+
+  no_audible_release: {
+    symbol: "̚",
+    appliesTo: "consonant",
+    effects: { release: "none" }
+  },
+  //ejective
+  ejective: {
+  symbol: "ʼ",
+  appliesTo: "consonant",
+  effects: { airstream: "egressive_glottalic" } // or just mark it as ejective
+}
 };
+
+module.exports = modifiers;
