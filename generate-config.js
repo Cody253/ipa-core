@@ -1,10 +1,10 @@
 // generate-config.js
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const core = require('./core');
-const modifiers = require('./modifiers');
+import core from './core.js';
+import modifiers from './modifiers.js';
 
 
 // -----------------------------
@@ -135,13 +135,13 @@ function generateOrthographyExport() {
     ' * Fill in your orthography below; examples are commented out.',
     ' */',
     '',
-    "const { parseConfig } = require('./parser');",
+    "import { parseConfig } from './parser.js';",
     '',
     'const orthography = {',
     commentedOrthography,
     '};',
     '',
-    'module.exports = parseConfig(orthography);',
+    'export default parseConfig(orthography);',
     ''
   ].join('\n');
 }
