@@ -5,8 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const core = require('./core.cjs');       // Use .default if core.js is ES module
-const modifiers = require('./modifiers.cjs'); // Use .default if modifiers.js is ES module
+const core = require('./core.js');       // Use .default if core.js is ES module
+const modifiers = require('./modifiers.js'); // Use .default if modifiers.js is ES module
 
 /** Pick random element */
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];

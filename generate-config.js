@@ -4,8 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const core = require('./core.cjs');       // your ES6 exports can stay; if core.js is ES module, you can require with .default
-const modifiers = require('./modifiers.cjs'); // same as above
+const core = require('./core.js');       // your ES6 exports can stay; if core.js is ES module, you can require with .default
+const modifiers = require('./modifiers.js'); // same as above
 
 // -----------------------------
 // GROUP IPA SYMBOLS BY TYPE
