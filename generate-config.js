@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // generate-config.js
 
 import fs from 'fs';
