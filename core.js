@@ -128,4 +128,4 @@ const core = {
 
 }
 
-export default core
+module.exports = core

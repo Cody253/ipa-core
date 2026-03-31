@@ -1,8 +1,8 @@
 // parser.js
 
-import core from "./core";
-import modifiers from "./modifiers";
-import rules from "./rules";
+const core = require("./core");
+const modifiers = require("./modifiers");
+const rules = require("./rules");
 
 /**
  * Parses a single phoneme with optional modifiers.
@@ -134,4 +134,4 @@ function parseConfig(config) {
   return parsed;
 }
 
-export { parsePhoneme, parseUnit, parseConfig };
+module.exports = { parsePhoneme, parseUnit, parseConfig };

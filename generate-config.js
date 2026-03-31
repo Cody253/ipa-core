@@ -1,28 +1,24 @@
 #!/usr/bin/env node
-// generate-config.js
+// generate-config-cli.cjs
 
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
-import core from './core.js';
-import modifiers from './modifiers.js';
-
+const core = require('./core.cjs');       // your ES6 exports can stay; if core.js is ES module, you can require with .default
+const modifiers = require('./modifiers.cjs'); // same as above
 
 // -----------------------------
 // GROUP IPA SYMBOLS BY TYPE
 // -----------------------------
 function groupByType(core) {
   const groups = {};
-
   for (const [symbol, data] of Object.entries(core)) {
     const type = data.type || 'other';
     if (!groups[type]) groups[type] = [];
     groups[type].push(symbol);
   }
-
   return groups;
 }
-
 
 // -----------------------------
 // WRAP SYMBOL LINES
@@ -35,33 +31,17 @@ function wrapSymbols(symbols, perLine = 12) {
   return lines.join('\n');
 }
 
-
 // -----------------------------
 // IPA SECTION
 // -----------------------------
 function generateIPASection(core) {
   const grouped = groupByType(core);
-
   const sections = Object.entries(grouped).map(([type, symbols]) => {
     symbols.sort((a, b) => a.localeCompare(b));
-
-    return [
-      `// ${type.toUpperCase()}`,
-      wrapSymbols(symbols),
-      ''
-    ].join('\n');
+    return [`// ${type.toUpperCase()}`, wrapSymbols(symbols), ''].join('\n');
   });
-
-  return [
-    '/**',
-    ' * IPA SYMBOL REFERENCE',
-    ' * Copy/paste symbols as needed',
-    ' */',
-    '',
-    ...sections
-  ].join('\n');
+  return ['/**', ' * IPA SYMBOL REFERENCE', ' * Copy/paste symbols as needed', '', ...sections].join('\n');
 }
-
 
 // -----------------------------
 // WRAP MODIFIERS HORIZONTALLY
@@ -69,11 +49,9 @@ function generateIPASection(core) {
 function wrapModifiers(modList, maxLineLength = 90) {
   const lines = [];
   let currentLine = '// ';
-
   modList.forEach((mod, index) => {
     const separator = index === 0 ? '' : ' | ';
     const nextChunk = separator + mod;
-
     if ((currentLine + nextChunk).length > maxLineLength) {
       lines.push(currentLine);
       currentLine = '// ' + mod;
@@ -81,12 +59,9 @@ function wrapModifiers(modList, maxLineLength = 90) {
       currentLine += nextChunk;
     }
   });
-
   if (currentLine.trim()) lines.push(currentLine);
-
   return lines.join('\n');
 }
-
 
 // -----------------------------
 // MODIFIER SECTION
@@ -94,25 +69,12 @@ function wrapModifiers(modList, maxLineLength = 90) {
 function generateModifierSection(modifiers) {
   const entries = Object.entries(modifiers);
   entries.sort(([a], [b]) => a.localeCompare(b));
-
   const formatted = entries.map(([key, data]) => {
-    const appliesTo = Array.isArray(data.appliesTo)
-      ? data.appliesTo.join(', ')
-      : data.appliesTo || '';
+    const appliesTo = Array.isArray(data.appliesTo) ? data.appliesTo.join(', ') : data.appliesTo || '';
     return `${key}(${appliesTo})`;
   });
-
-  return [
-    '/**',
-    ' * MODIFIER REFERENCE',
-    ' * modifier(appliesTo)',
-    ' */',
-    '',
-    wrapModifiers(formatted),
-    ''
-  ].join('\n');
+  return ['/**', ' * MODIFIER REFERENCE', ' * modifier(appliesTo)', ' */', '', wrapModifiers(formatted), ''].join('\n');
 }
-
 
 // -----------------------------
 // ORTHOGRAPHY EXPORT SECTION
@@ -136,17 +98,16 @@ function generateOrthographyExport() {
     ' * Fill in your orthography below; examples are commented out.',
     ' */',
     '',
-    "import { parseConfig } from './parser.js';",
+    "const { parseConfig } = require('./parser.cjs');",
     '',
     'const orthography = {',
     commentedOrthography,
     '};',
     '',
-    'export default parseConfig(orthography);',
+    'module.exports = parseConfig(orthography);',
     ''
   ].join('\n');
 }
-
 
 // -----------------------------
 // MAIN GENERATOR
@@ -165,7 +126,6 @@ function generateConfig() {
 
   console.log('✅ ipa.config.js generated with parseConfig() export');
 }
-
 
 // RUN
 generateConfig();

@@ -1,10 +1,12 @@
 #!/usr/bin/env node
+// generate-conlang-cli.cjs
 
-import fs from "fs";
-import path from "path";
-import readline from "readline";
-import core from "./core.js";
-import modifiers from "./modifiers.js";
+const fs = require('fs');
+const path = require('path');
+const readline = require('readline');
+
+const core = require('./core.cjs');       // Use .default if core.js is ES module
+const modifiers = require('./modifiers.cjs'); // Use .default if modifiers.js is ES module
 
 /** Pick random element */
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -34,7 +36,7 @@ function prompt(query) {
 
 /** Generate conlang orthography */
 function generateConlang({ alphabet, mod1Chance, mod2Chance, affricateChance }) {
-  const letters = alphabet.split("");
+  const letters = alphabet.split('');
   const usedIPA = new Set();
   const orthography = {};
   const coreKeys = shuffle(Object.keys(core));
@@ -73,10 +75,10 @@ function generateConlang({ alphabet, mod1Chance, mod2Chance, affricateChance }) 
     }
 
     // Plosive → affricate
-    if (baseObj?.features?.manner === "plosive" && Math.random() < affricateChance) {
+    if (baseObj?.features?.manner === 'plosive' && Math.random() < affricateChance) {
       const fricatives = Object.entries(core).filter(
         ([, obj]) =>
-          obj?.features?.manner === "fricative" &&
+          obj?.features?.manner === 'fricative' &&
           obj.features.place === baseObj.features.place
       );
       if (fricatives.length) {
@@ -97,10 +99,10 @@ function generateConlang({ alphabet, mod1Chance, mod2Chance, affricateChance }) 
 
 /** Main async function */
 async function main() {
-  const alphabet = (await prompt("Enter alphabet (default a-z): ")) || "abcdefghijklmnopqrstuvwxyz";
-  const mod1 = parseFloat((await prompt("Modifier 1 chance (default 0.33): ")) || "0.33");
-  const mod2 = parseFloat((await prompt("Modifier 2 chance (default 0.06): ")) || "0.06");
-  const aff = parseFloat((await prompt("Plosive → affricate chance (default 0.1): ")) || "0.1");
+  const alphabet = (await prompt('Enter alphabet (default a-z): ')) || 'abcdefghijklmnopqrstuvwxyz';
+  const mod1 = parseFloat((await prompt('Modifier 1 chance (default 0.33): ')) || '0.33');
+  const mod2 = parseFloat((await prompt('Modifier 2 chance (default 0.06): ')) || '0.06');
+  const aff = parseFloat((await prompt('Plosive → affricate chance (default 0.1): ')) || '0.1');
 
   const orthography = generateConlang({
     alphabet,
@@ -109,14 +111,15 @@ async function main() {
     affricateChance: aff,
   });
 
-  const outPath = path.join(process.cwd(), "generatedConlang.js");
+  const outPath = path.join(process.cwd(), 'generatedConlang.js');
   const lines = Object.entries(orthography).map(
     ([l, v]) => `  ${JSON.stringify(l)}:${JSON.stringify(v)}`
   );
-  const content = `/** Generated conlang orthography */\nconst generatedOrthography={\n${lines.join(",\n")}\n};\nexport default generatedOrthography;`;
 
-  fs.writeFileSync(outPath, content, "utf-8");
-  console.log("✅ generatedConlang.js written");
+  const content = `/** Generated conlang orthography */\nconst generatedOrthography = {\n${lines.join(',\n')}\n};\nmodule.exports = generatedOrthography;\n`;
+
+  fs.writeFileSync(outPath, content, 'utf-8');
+  console.log('✅ generatedConlang.js written');
 }
 
 main();
