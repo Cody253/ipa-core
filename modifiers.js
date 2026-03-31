@@ -247,4 +247,4 @@ const modifiers = {
 }
 };
 
-module.exports = modifiers;
+export default modifiers;

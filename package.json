@@ -4,10 +4,12 @@
   "description": "Language-agnostic IPA core with features",
   "license": "ISC",
   "author": "Cody Bruno",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "init:ipa": "node generate-config.js",
+    "make-conlang": "node generate-conlang.js"
   },
   "keywords": ["ipa", "phoneme", "language", "linguistics"]
 }

@@ -20,6 +20,24 @@ const orthography = {
   l: parseUnit("ɬ")
 };
 
+// Another sample orthography config using shorthand
+const shorthandOrthography = {
+  // A single consonant with a modifier
+  k: ["k", ["aspirated"]],
+
+  // A single vowel with a modifier
+  a: ["ɑ", ["more_rounded"]],
+
+  // A consonant sequence (affricate)
+  x̱: [[
+    'k', ["ejective", "aspirated"],
+    'x', []
+]],
+
+  // Another single consonant
+  l: ["ɬ"]
+};
+
 console.log("=== Orthography Config ===");
 console.log(JSON.stringify(orthography, null, 2));
 
@@ -36,3 +54,7 @@ console.log(singlePhoneme);
 const affricateSequence = parsed.x̱;
 console.log("\n=== Affricate Sequence 'x̱' Features ===");
 console.log(affricateSequence);
+
+const parsedShorthand = parseConfig(shorthandOrthography);
+console.log("\n=== Parsed Output2 ===");
+console.log(JSON.stringify(parsedShorthand, null, 2));

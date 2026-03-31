@@ -1,8 +1,8 @@
 // parser.js
 
-const core = require("./core");
-const modifiers = require("./modifiers");
-const rules = require("./rules");
+import core from "./core";
+import modifiers from "./modifiers";
+import rules from "./rules";
 
 /**
  * Parses a single phoneme with optional modifiers.
@@ -94,15 +94,44 @@ function parseUnitObj(unitObj) {
 
 /**
  * Parses an entire orthography config.
- * @param {object} config - { letter: parseUnit(...) }
+ * Supports:
+ * 1) Full parseUnit() objects
+ * 2) Single-phoneme shorthand: ["base", ["modifiers"]]
+ * 3) Sequence shorthand: [["base1", ["mods1"]], ["base2", ["mods2"]], ...]
+ * @param {object} config - { letter: parseUnit(...) OR shorthand }
  * @returns {object} parsed - { letter: parsedPhoneme OR array if sequence }
  */
 function parseConfig(config) {
   const parsed = {};
+
   for (const letter in config) {
-    parsed[letter] = parseUnitObj(config[letter]);
+    const val = config[letter];
+
+    let unitObj;
+
+    // Already a parseUnit object
+    if (val && typeof val === "object" && val.type && (val.type === "single" || val.type === "sequence")) {
+      unitObj = val;
+    }
+    // Shorthand single phoneme: ["base", ["modifiers"]]
+    else if (Array.isArray(val) && typeof val[0] === "string") {
+      const base = val[0];
+      const mods = Array.isArray(val[1]) ? val[1] : [];
+      unitObj = { type: "single", base, modifiers: mods };
+    }
+    // Shorthand sequence: [["base1", ["mods1"]], ["base2", ["mods2"]], ...]
+    else if (Array.isArray(val) && val.every(el => Array.isArray(el) && typeof el[0] === "string")) {
+      const sequence = val.map(([base, mods]) => ({ base, modifiers: Array.isArray(mods) ? mods : [] }));
+      unitObj = { type: "sequence", sequence };
+    }
+    else {
+      throw new Error(`Invalid orthography entry for "${letter}": ${JSON.stringify(val)}`);
+    }
+
+    parsed[letter] = parseUnitObj(unitObj);
   }
+
   return parsed;
 }
 
-module.exports = { parsePhoneme, parseUnit, parseConfig };
+export { parsePhoneme, parseUnit, parseConfig };

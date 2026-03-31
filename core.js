@@ -91,7 +91,6 @@ const core = {
     'w': { type: "consonant", features: { manner: "approximant", place: "labial-velar", voicing: "voiced" }, airstream: "pulmonic" },
     'ɺ': { type: "consonant", features: { manner: "lateral flap", place: "alveolar", voicing: "voiced" }, airstream: "pulmonic" },
     'ɥ': { type: "consonant", features: { manner: "approximant", place: "labial-palatal", voicing: "voiced" }, airstream: "pulmonic" },
-    'ɧ': { type: "consonant", features: { manner: "co-articulated fricative", place: ["postalveolar", "velar"], voicing: "voiceless" }, airstream: "pulmonic" },
     'ʜ': { type: "consonant", features: { manner: "fricative", place: "epiglottal", voicing: "voiceless" }, airstream: "pulmonic" },
     'ʢ': { type: "consonant", features: { manner: "fricative/approximant", place: "epiglottal", voicing: "voiced" }, airstream: "pulmonic" },
     'ʡ': { type: "consonant", features: { manner: "plosive", place: "epiglottal", voicing: "voiceless" }, airstream: "pulmonic" },
@@ -129,4 +128,4 @@ const core = {
 
 }
 
-module.exports = core
+export default core
