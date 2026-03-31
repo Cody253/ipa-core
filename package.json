@@ -1,6 +1,6 @@
 {
   "name": "ipa-core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Language-agnostic IPA core with features",
   "license": "ISC",
   "author": "Cody Bruno",
@@ -12,8 +12,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "init:ipa": "node generate-config.js",
-    "make-conlang": "node generate-conlang.js"
+    "init:ipa": "node generate-config-cli.js",
+    "make-conlang": "node generate-conlang-cli.js"
   },
   "keywords": [
     "ipa",
