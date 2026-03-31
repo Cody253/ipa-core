@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import('./generate-config.js').catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+import('file://' + new URL('./generate-config.js', import.meta.url).pathname)
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
