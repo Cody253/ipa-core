@@ -1,6 +1,6 @@
 {
   "name": "ipa-core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Language-agnostic IPA core with features",
   "license": "ISC",
   "author": "Cody Bruno",
