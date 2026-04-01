@@ -111,7 +111,15 @@ async function main() {
     affricateChance: aff,
   });
 
-  const outPath = path.join(process.cwd(), 'generatedConlang.js');
+  // Ensure 'ipa' folder exists
+  const ipaDir = path.join(process.cwd(), 'ipa');
+  if (!fs.existsSync(ipaDir)) {
+    fs.mkdirSync(ipaDir, { recursive: true });
+  }
+
+  // Write file inside 'ipa' folder
+  const outPath = path.join(ipaDir, 'generatedConlang.js');
+
   const lines = Object.entries(orthography).map(
     ([l, v]) => `  ${JSON.stringify(l)}:${JSON.stringify(v)}`
   );
@@ -119,7 +127,7 @@ async function main() {
   const content = `/** Generated conlang orthography */\nconst generatedOrthography = {\n${lines.join(',\n')}\n};\nmodule.exports = generatedOrthography;\n`;
 
   fs.writeFileSync(outPath, content, 'utf-8');
-  console.log('✅ generatedConlang.js written');
+  console.log('✅ ipa/generatedConlang.js written');
 }
 
 main();

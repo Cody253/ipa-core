@@ -1,19 +1,26 @@
 {
   "name": "ipa-core",
-  "version": "1.1.13",
+  "version": "1.2.1",
   "description": "Language-agnostic IPA core with features",
+  "repository": "github:Cody253/ipa-core",
+  "homepage": "https://github.com/Cody253/ipa-core#readme",
+  "bugs": {
+    "url": "https://github.com/Cody253/ipa-core/issues"
+  },
   "license": "ISC",
   "author": "Cody Bruno",
   "type": "commonjs",
   "bin": {
     "make-conlang": "generate-conlang.js",
-    "ipa-init": "generate-config.js"
+    "ipa-init": "generate-config.js",
+    "fill-orthography": "fill-orthography.js"
   },
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
     "init:ipa": "node generate-config.js",
-    "make-conlang": "node generate-conlang.js"
+    "make-conlang": "node generate-conlang.js",
+    "fill-orthography": "node fill-orthography.js"
   },
   "keywords": [
     "ipa",

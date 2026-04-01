@@ -121,10 +121,23 @@ function generateConfig() {
     generateOrthographyExport()
   ].join('\n');
 
-  const outputPath = path.join(process.cwd(), 'ipa.config.js');
+  // Ensure 'ipa' folder exists
+  const ipaDir = path.join(process.cwd(), 'ipa');
+  if (!fs.existsSync(ipaDir)) {
+    fs.mkdirSync(ipaDir, { recursive: true });
+  }
+
+  // Write file inside 'ipa' folder
+  const outputPath = path.join(ipaDir, 'ipa.config.js');
   fs.writeFileSync(outputPath, content, 'utf-8');
 
-  console.log('✅ ipa.config.js generated with parseConfig() export');
+  console.log('✅ ipa/ipa.config.js generated with parseConfig() export');
+
+  // Write alphabet.js
+  const alphabetPath = path.join(ipaDir, 'alphabet.js');
+  const alphabetContent = 'const alphabet = [];\nmodule.exports = alphabet;\n';
+  fs.writeFileSync(alphabetPath, alphabetContent, 'utf-8');
+  console.log('✅ ipa/alphabet.js generated with empty alphabet array');
 }
 
 // RUN
