@@ -46,7 +46,40 @@ const rules = {
 
   // Special consonant markers
   aspirated: { incompatibleWith: ["voiceless_flap", "no_audible_release"] },
-  no_audible_release: { incompatibleWith: ["aspirated"] }
+  no_audible_release: { incompatibleWith: ["aspirated"] },
+
+  // Sequence-level rules
+  affricate: {
+    requires: [
+      { position: 0, features: { manner: "plosive" } },
+      { position: 1, features: { manner: "fricative" } }
+    ],
+    length: 2
+  },
+
+  diphthong: {
+    requiresAll: [
+      { type: "vowel" }
+    ]
+  },
+
+  coarticulation: {
+    requiresAll: [
+      { type: "consonant" }
+    ]
+  },
+
+  syllable: {
+    requires: [
+      { position: 0, type: "consonant" }
+    ],
+    requiresFromPosition: {
+      1: [
+        { type: "vowel" }
+      ]
+    },
+    minLength: 2
+  }
 };
 
 module.exports = rules

@@ -95,7 +95,7 @@ const core = {
     'ʢ': { type: "consonant", features: { manner: "fricative/approximant", place: "epiglottal", voicing: "voiced" }, airstream: "pulmonic" },
     'ʡ': { type: "consonant", features: { manner: "plosive", place: "epiglottal", voicing: "voiceless" }, airstream: "pulmonic" },
     //coarticulated
-    'ɧ': { type: "consonant", coarticulated: true, components: ["ʃ", "x"] },
+    // 'ɧ': { type: "consonant", coarticulated: true, components: ["ʃ", "x"] },
     //vowels
     //front
     'i': { type: "vowel", features: { height: "close", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" },

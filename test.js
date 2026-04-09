@@ -22,17 +22,44 @@ const orthography = {
 
 // Another sample orthography config using shorthand
 const shorthandOrthography = {
-  // A single consonant with a modifier
-  k: ["k", ["aspirated"]],
+  // A single consonant
+  k: ["k"],
 
   // A single vowel with a modifier
   a: ["ɑ", ["more_rounded"]],
 
-  // A consonant sequence (affricate)
-  x̱: [[
-    'k', ["ejective", "aspirated"],
-    'x', []
-]],
+  // A consonant sequence (affricate) with new string shorthand
+  x̱: [
+    ["k", ["ejective", "aspirated"]],
+    ["x", []],
+    "affricate"
+  ],
+
+  // Diphthong example
+  ai: [
+    ["ɑ"],
+    ["i"],
+    "diphthong"
+  ],
+
+  // Syllable example (e.g., CV - consonant followed by vowel)
+  na: [
+    ["n"],
+    ["ɑ"],
+    "syllable"
+  ],
+
+  // Coarticulation example (e.g., labial-velar)
+  w: [
+    ["ʍ"],
+    "coarticulation"
+  ],
+
+  // Plain sequence (no sequence modifier)
+  kl: [
+    ["k"],
+    ["l"]
+  ],
 
   // Another single consonant
   l: ["ɬ"]

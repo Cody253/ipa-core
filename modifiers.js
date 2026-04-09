@@ -241,10 +241,16 @@ const modifiers = {
   },
   //ejective
   ejective: {
-  symbol: "ʼ",
-  appliesTo: "consonant",
-  effects: { airstream: "egressive_glottalic" } // or just mark it as ejective
-}
+    symbol: "ʼ",
+    appliesTo: "consonant",
+    effects: { airstream: "egressive_glottalic" }
+  },
+
+  // SEQUENCE MODIFIERS
+  diphthong: { appliesTo: "sequence", effects: { type: "diphthong" } },
+  affricate: { appliesTo: "sequence", effects: { type: "affricate" } },
+  syllable: { appliesTo: "sequence", effects: { type: "syllable" } },
+  coarticulation: { appliesTo: "sequence", effects: { type: "coarticulation" } }
 };
 
 module.exports = modifiers;
