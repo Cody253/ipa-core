@@ -38,8 +38,8 @@ function parsePhoneme(base, appliedModifiers = []) {
       continue;
     }
 
-    if (mod.features) {
-      phoneme.features = { ...phoneme.features, ...mod.features };
+    if (mod.effects) {
+      phoneme.features = { ...phoneme.features, ...mod.effects };
     } else {
       phoneme.features[modKey] = true;
     }
@@ -58,10 +58,11 @@ function parsePhoneme(base, appliedModifiers = []) {
  * @param {string[]} appliedModifiers - Modifiers for single phoneme (ignored if sequence)
  * @returns {object}
  */
-function parseUnit(unit, sequenceModifier = null) {
+function parseUnit(unit, appliedModifiers = null) {
   // if unit is a string, treat as single phoneme
   if (typeof unit === "string") {
-    return { type: "single", base: unit, modifiers: [] };
+    const mods = Array.isArray(appliedModifiers) ? appliedModifiers : [];
+    return { type: "single", base: unit, modifiers: mods };
   }
 
   // if unit is an object with multiple phonemes, treat as sequence
@@ -71,7 +72,7 @@ function parseUnit(unit, sequenceModifier = null) {
       const mods = unit[base] || [];
       sequence.push({ base, modifiers: mods });
     }
-    const type = sequenceModifier || "sequence";
+    const type = (appliedModifiers && typeof appliedModifiers === "string") ? appliedModifiers : "sequence";
     return { type, sequence };
   }
 

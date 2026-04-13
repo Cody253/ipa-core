@@ -1,38 +1,45 @@
-//modifier compatability
+// modifier compatibility
 const rules = {
-  // Voicing / phonation
+  // VOICING / PHONATION
   voiceless: { incompatibleWith: ["voiced", "creaky_voice", "breathy_voice"] },
-  voiced: { incompatibleWith: ["voiceless", "voiceless_flap"] },
-  voiceless_flap: { incompatibleWith: ["voiced", "aspirated"] },
+  voiced: { incompatibleWith: ["voiceless"] },
   creaky_voice: { incompatibleWith: ["voiceless"] },
   breathy_voice: { incompatibleWith: ["voiceless"] },
 
-  // Place / articulation
-  advanced: { incompatibleWith: ["retracted", "velarized_or_pharyngealized"] },
-  retracted: { incompatibleWith: ["advanced", "velarized_or_pharyngealized"] },
-  palatalized: { incompatibleWith: ["velarized_or_pharyngealized"] },
-  velarized_or_pharyngealized: { incompatibleWith: ["palatalized", "advanced", "retracted"] },
-  pharyngealized: { incompatibleWith: ["palatalized"] },
-  linguolabial: { incompatibleWith: [] },
-  dental: { incompatibleWith: [] },
-  apical: { incompatibleWith: [] },
-  laminal: { incompatibleWith: [] },
-  velarized: { incompatibleWith: ["palatalized", "advanced", "retracted"] },
+  // PLACE: SHIFTS (mutually exclusive)
+  advanced: { incompatibleWith: ["retracted"] },
+  retracted: { incompatibleWith: ["advanced"] },
 
-  // Syllabicity
+  // PLACE: PRIMARY OVERRIDES
+  // (not inherently incompatible — last one wins in processing)
+  dental: { incompatibleWith: [] },
+  linguolabial: { incompatibleWith: [] },
+
+  // TONGUE PART (mutually exclusive)
+  apical: { incompatibleWith: ["laminal"] },
+  laminal: { incompatibleWith: ["apical"] },
+
+  // SECONDARY ARTICULATION
+  // These can stack in real phonetics, but we constrain for clarity
+  palatalized: { incompatibleWith: ["velarized", "pharyngealized"] },
+  velarized: { incompatibleWith: ["palatalized"] },
+  pharyngealized: { incompatibleWith: ["palatalized"] },
+  labialized: { incompatibleWith: [] },
+
+  // SYLLABICITY
   syllabic: { incompatibleWith: ["non_syllabic"] },
   non_syllabic: { incompatibleWith: ["syllabic"] },
 
-  // Nasalization / rhoticity
+  // NASALIZATION / RHOTICITY
   nasalized: { incompatibleWith: [] },
   rhoticity: { incompatibleWith: [] },
 
-  // Length / duration
+  // LENGTH / DURATION
   extra_short: { incompatibleWith: ["length_half_long", "length_long"] },
   length_half_long: { incompatibleWith: ["extra_short", "length_long"] },
   length_long: { incompatibleWith: ["extra_short", "length_half_long"] },
 
-  // Segment-level tones / accents
+  // TONE
   high_tone: { incompatibleWith: ["low_tone", "falling_tone", "extra_low_tone"] },
   low_tone: { incompatibleWith: ["high_tone", "rising_tone", "extra_high_tone"] },
   rising_tone: { incompatibleWith: ["falling_tone", "low_tone"] },
@@ -41,14 +48,30 @@ const rules = {
   extra_low_tone: { incompatibleWith: ["extra_high_tone", "high_tone"] },
   downstep: { incompatibleWith: [] },
   upstep: { incompatibleWith: [] },
-  extra_high_pitch: { incompatibleWith: ["extra_low_pitch"] },
-  extra_low_pitch: { incompatibleWith: ["extra_high_pitch"] },
 
-  // Special consonant markers
-  aspirated: { incompatibleWith: ["voiceless_flap", "no_audible_release"] },
+  // RELEASE / ASPIRATION
+  aspirated: { incompatibleWith: ["no_audible_release"] },
   no_audible_release: { incompatibleWith: ["aspirated"] },
 
-  // Sequence-level rules
+    // VOWEL QUALITY (non-conflicting dimensions)
+  more_rounded: { incompatibleWith: [] },
+  less_rounded: { incompatibleWith: [] },
+
+  centralized: { incompatibleWith: ["mid_centralized"] },
+  mid_centralized: { incompatibleWith: ["centralized"] },
+
+  raised: { incompatibleWith: ["lowered"] },
+  lowered: { incompatibleWith: ["raised"] },
+
+  // TONGUE ROOT (single axis, but isolated from others)
+  advanced_tongue_root: { incompatibleWith: ["retracted_tongue_root"] },
+  retracted_tongue_root: { incompatibleWith: ["advanced_tongue_root"] },
+
+  // AIRSTREAM MECHANISM (independent feature class)
+  ejective: { incompatibleWith: [] },
+
+  // SEQUENCE-LEVEL RULES
+
   affricate: {
     requires: [
       { position: 0, features: { manner: "plosive" } },
@@ -60,13 +83,15 @@ const rules = {
   diphthong: {
     requiresAll: [
       { type: "vowel" }
-    ]
+    ],
+    minLength: 2
   },
 
   coarticulation: {
     requiresAll: [
       { type: "consonant" }
-    ]
+    ],
+    minLength: 2
   },
 
   syllable: {
@@ -82,4 +107,4 @@ const rules = {
   }
 };
 
-module.exports = rules
+module.exports = rules;
