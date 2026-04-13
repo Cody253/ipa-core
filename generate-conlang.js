@@ -86,9 +86,46 @@ function generateConlang({ alphabet, mod1Chance, mod2Chance, affricateChance }) 
         orthography[letter] = [
           [ipaKey, modifiersList],
           [fricKey, []],
+          "affricate"
         ];
         return;
       }
+    }
+
+    // Diphthong (vowel + vowel sequence)
+    if (baseObj?.type === 'vowel' && Math.random() < 0.3) {
+      const vowels = Object.keys(core).filter(k => core[k].type === 'vowel');
+      const secondVowel = pickRandom(vowels);
+      orthography[letter] = [
+        [ipaKey, modifiersList],
+        [secondVowel, []],
+        "diphthong"
+      ];
+      return;
+    }
+
+    // Syllable (consonant + vowel)
+    if (baseObj?.type === 'consonant' && Math.random() < 0.3) {
+      const vowels = Object.keys(core).filter(k => core[k].type === 'vowel');
+      const vowel = pickRandom(vowels);
+      orthography[letter] = [
+        [ipaKey, modifiersList],
+        [vowel, []],
+        "syllable"
+      ];
+      return;
+    }
+
+    // Coarticulation (consonant + consonant)
+    if (baseObj?.type === 'consonant' && Math.random() < 0.15) {
+      const consonants = Object.keys(core).filter(k => core[k].type === 'consonant');
+      const secondConsonant = pickRandom(consonants);
+      orthography[letter] = [
+        [ipaKey, modifiersList],
+        [secondConsonant, []],
+        "coarticulation"
+      ];
+      return;
     }
 
     orthography[letter] = [ipaKey, modifiersList];

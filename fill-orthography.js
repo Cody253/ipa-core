@@ -34,7 +34,7 @@ if (!Array.isArray(alphabet) || alphabet.length === 0) {
 // -----------------------------
 // GENERATE orthography OBJECT STRING
 // -----------------------------
-const orthographyLines = alphabet.map(letter => `  ["${letter}"]: ["", []],`);
+const orthographyLines = alphabet.map(letter => `  // "${letter}": ["", []],`);
 const orthographyString = `const orthography = {\n${orthographyLines.join('\n')}\n};`;
 
 // -----------------------------

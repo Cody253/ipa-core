@@ -1,6 +1,7 @@
 // test.js
 
 const { parseUnit, parseConfig } = require("./parser");
+const { getDefinitions } = require("./get-definitions");
 
 // Sample orthography config
 const orthography = {
@@ -14,10 +15,15 @@ const orthography = {
   x̱: parseUnit({
     k: ["ejective", "aspirated"],
     x: []
-  }),
+  }, "affricate"),
 
   // Another single consonant
-  l: parseUnit("ɬ")
+  l: parseUnit("ɬ"),
+
+  // Consonant with place modifiers
+  t̪: parseUnit("t", ["dental"]),
+  s̻: parseUnit("s", ["laminal"]),
+  k̠: parseUnit("k", ["retracted"])
 };
 
 // Another sample orthography config using shorthand
@@ -75,13 +81,26 @@ console.log(JSON.stringify(parsed, null, 2));
 // Optional: inspect a single phoneme
 const singlePhoneme = parsed.k;
 console.log("\n=== Single Phoneme 'k' Features ===");
-console.log(singlePhoneme);
+console.log(JSON.stringify(singlePhoneme, null, 2));
 
 // Optional: inspect a sequence
 const affricateSequence = parsed.x̱;
 console.log("\n=== Affricate Sequence 'x̱' Features ===");
-console.log(affricateSequence);
+console.log(JSON.stringify(affricateSequence, null, 2));
 
-const parsedShorthand = parseConfig(shorthandOrthography);
-console.log("\n=== Parsed Output2 ===");
-console.log(JSON.stringify(parsedShorthand, null, 2));
+// const parsedShorthand = parseConfig(shorthandOrthography);
+// console.log("\n=== Parsed Output2 ===");
+// console.log(JSON.stringify(parsedShorthand, null, 2));
+
+// Definitions
+
+
+console.log("\n=== Definitions for 'k' ===");
+console.log(getDefinitions(parsed.k));
+
+console.log("\n=== Definitions for 'x̱' (affricate) ===");
+console.log(getDefinitions(parsed.x̱));
+
+console.log("\n=== Definitions for 'a' (vowel) ===");
+console.log(getDefinitions(parsed.a));
+

@@ -38,9 +38,9 @@ function generateIPASection(core) {
   const grouped = groupByType(core);
   const sections = Object.entries(grouped).map(([type, symbols]) => {
     symbols.sort((a, b) => a.localeCompare(b));
-    return [`// ${type.toUpperCase()}`, wrapSymbols(symbols), ''].join('\n');
+    return [`// ${type.toUpperCase()}`, wrapSymbols(symbols)].join('\n');
   });
-  return ['/**', ' * IPA SYMBOL REFERENCE', ' * Copy/paste symbols as needed', '', ...sections].join('\n');
+  return ['/**', ' * IPA SYMBOL REFERENCE', ' * Copy/paste symbols as needed', ' */', ...sections].join('\n');
 }
 
 // -----------------------------
@@ -73,7 +73,26 @@ function generateModifierSection(modifiers) {
     const appliesTo = Array.isArray(data.appliesTo) ? data.appliesTo.join(', ') : data.appliesTo || '';
     return `${key}(${appliesTo})`;
   });
-  return ['/**', ' * MODIFIER REFERENCE', ' * modifier(appliesTo)', ' */', '', wrapModifiers(formatted), ''].join('\n');
+  return ['/**', ' * MODIFIER REFERENCE', ' * modifier(appliesTo)', ' */', wrapModifiers(formatted)].join('\n');
+}
+
+// -----------------------------
+// SEQUENCE MODIFIER SECTION
+// -----------------------------
+function generateSequenceModifierSection(modifiers) {
+  const sequenceModifiers = Object.entries(modifiers)
+    .filter(([key, data]) => {
+      const appliesTo = data.appliesTo;
+      return Array.isArray(appliesTo) ? appliesTo.includes("sequence") : appliesTo === "sequence";
+    })
+    .map(([key]) => key);
+
+  if (sequenceModifiers.length === 0) {
+    return '';
+  }
+
+  const lines = sequenceModifiers.map(m => `// ${m}`);
+  return ['/**', ' * SEQUENCE MODIFIERS', ' * Add as last element in array', ' */', ...lines].join('\n');
 }
 
 // -----------------------------
@@ -85,7 +104,8 @@ function generateOrthographyExport() {
     '// a: ["ɑ", ["more_rounded"]],',
     '// x̱: [',
     '//   ["k", ["ejective", "aspirated"]],',
-    '//   ["x", []]',
+    '//   ["x", []],',
+    '//   "affricate"',
     '// ],',
     '// l: ["ɬ"]'
   ].join('\n');
@@ -98,14 +118,13 @@ function generateOrthographyExport() {
     ' * Fill in your orthography below; examples are commented out.',
     ' */',
     '',
-    "const { parseConfig } = require('./parser.cjs');",
+    "const { parseConfig } = require('./parser.js');",
     '',
     'const orthography = {',
     commentedOrthography,
     '};',
     '',
-    'module.exports = parseConfig(orthography);',
-    ''
+    'module.exports = parseConfig(orthography);'
   ].join('\n');
 }
 
@@ -113,13 +132,14 @@ function generateOrthographyExport() {
 // MAIN GENERATOR
 // -----------------------------
 function generateConfig() {
-  const content = [
+  const sections = [
     generateIPASection(core),
-    '',
     generateModifierSection(modifiers),
-    '',
+    generateSequenceModifierSection(modifiers),
     generateOrthographyExport()
-  ].join('\n');
+  ].filter(s => s.length > 0);
+
+  const content = sections.join('\n\n');
 
   // Ensure 'ipa' folder exists
   const ipaDir = path.join(process.cwd(), 'ipa');
@@ -133,11 +153,13 @@ function generateConfig() {
 
   console.log('✅ ipa/ipa.config.js generated with parseConfig() export');
 
-  // Write alphabet.js
+  // Write alphabet.js if it doesn't exist
   const alphabetPath = path.join(ipaDir, 'alphabet.js');
-  const alphabetContent = 'const alphabet = [];\nmodule.exports = alphabet;\n';
-  fs.writeFileSync(alphabetPath, alphabetContent, 'utf-8');
-  console.log('✅ ipa/alphabet.js generated with empty alphabet array');
+  if (!fs.existsSync(alphabetPath)) {
+    const alphabetContent = 'const alphabet = [];\nmodule.exports = alphabet;\n';
+    fs.writeFileSync(alphabetPath, alphabetContent, 'utf-8');
+    console.log('✅ ipa/alphabet.js generated with empty alphabet array');
+  }
 }
 
 // RUN
