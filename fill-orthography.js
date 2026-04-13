@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// fill-orthography.js
+// fill-orthography.cjs
 
 const fs = require('fs');
 const path = require('path');
