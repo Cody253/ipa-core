@@ -124,7 +124,9 @@ const core = {
     'o': { type: "vowel", features: { height: "close-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
     'ɔ': { type: "vowel", features: { height: "open-mid", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
     'ɑ': { type: "vowel", features: { height: "open", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
-    'ɒ': { type: "vowel", features: { height: "open", backness: "back", rounding: "rounded" }, airstream: "pulmonic" }
+    'ɒ': { type: "vowel", features: { height: "open", backness: "back", rounding: "rounded" }, airstream: "pulmonic" },
+    'ʌ': { type: "vowel", features: { height: "open-mid", backness: "back", rounding: "unrounded" }, airstream: "pulmonic" },
+    'a': { type: "vowel", features: { height: "open", backness: "front", rounding: "unrounded" }, airstream: "pulmonic" }
 
 }
 
