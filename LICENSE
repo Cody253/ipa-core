@@ -1,0 +1,69 @@
+ipa-core License v1.3
+
+Copyright (c) 2026 Charlie Blair
+
+1. Definitions
+
+"Software" refers to the ipa-core package and all associated files.
+
+"Non-Commercial Use" means use that is not primarily intended for or directed toward
+commercial advantage or monetary compensation.
+
+"Tribal Government" refers to any federally, state, provincially, or locally recognized
+Indigenous or Native governing body of the Americas, including tribal agencies,
+departments, and affiliated public institutions.
+
+"Indigenous Language of the Americas" refers to any language native to the Indigenous
+peoples of North, Central, or South America.
+
+"Direct Involvement" means active collaboration with, consultation of, or authorization
+from individuals, communities, or recognized representatives who are speakers or
+cultural stewards of the language in question.
+
+2. Grant of License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the Software to use, copy, modify, and redistribute the Software solely for
+Non-Commercial Use, subject to the conditions of this license.
+
+3. Tribal Government Exception
+
+Tribal Governments of the Americas are granted permission to use, copy, modify,
+redistribute, and deploy the Software for any purpose, including commercial,
+governmental, and public-facing applications, without restriction or fee.
+
+4. Indigenous Language Use Requirement
+
+Redistribution or public use of the Software involving an Indigenous Language of the Americas
+requires Direct Involvement with speakers or recognized representatives of that language.
+
+5. Restrictions
+
+Except as provided in Section 3, the following are prohibited:
+
+- Any Commercial Use of the Software
+- Selling, sublicensing, or monetizing the Software
+- Offering the Software as part of a paid product, service, API, or SaaS platform
+
+6. Attribution
+
+All uses of the Software must include clear and visible attribution:
+
+"ipa-core by Cody Bruno"
+
+7. No Additional Licensing
+
+The author does not offer commercial licenses for this Software.
+Any use outside the scope of this license is prohibited.
+
+8. Disclaimer of Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+9. Limitation of Liability
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
