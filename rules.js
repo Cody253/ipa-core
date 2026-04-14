@@ -81,9 +81,6 @@ const rules = {
   },
 
   diphthong: {
-    requiresAll: [
-      { type: "vowel" }
-    ],
     minLength: 2
   },
 
