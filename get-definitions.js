@@ -16,6 +16,18 @@ function getDefinitions(phoneme) {
       steps.push(dictionary[p.features.voicing]);
     }
 
+    if (p.features?.height && dictionary[p.features.height]) {
+      steps.push(dictionary[p.features.height]);
+    }
+
+    if (p.features?.backness && dictionary[p.features.backness]) {
+      steps.push(dictionary[p.features.backness]);
+    }
+
+    if (p.features?.rounding) {
+      steps.push(dictionary[p.features.rounding] || p.features.rounding);
+    }
+
     if (p.airstream && dictionary[p.airstream]) {
       steps.push(dictionary[p.airstream]);
     }
