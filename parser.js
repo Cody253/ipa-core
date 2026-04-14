@@ -111,8 +111,8 @@ function validateSequence(sequenceObj) {
       }
       if (req.features) {
         for (const [key, value] of Object.entries(req.features)) {
-          if (component.features[key] !== value) {
-            throw new Error(`${type} requires position ${req.position} to have features.${key}="${value}", got "${component.features[key]}"`);
+          if (!component.features[key].includes(value)) {
+            throw new Error(`${type} requires position ${req.position} to have features.${key} containing "${value}", got "${component.features[key]}"`);
           }
         }
       }
